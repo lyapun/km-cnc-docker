@@ -1,13 +1,15 @@
 FROM ubuntu
 
 RUN apt-get update
-RUN apt-get install -y python-dev python-distribute python-pip
+RUN apt-get install -y php5
 
-ADD ./requirements.txt /www/requirements.txt
-RUN pip install -r /www/requirements.txt
+ADD ./info.php /www/info.php
+# RUN pip install -r /www/requirements.txt
 
-ADD ./app.py /www/app.py
+# ADD ./app.py /www/app.py
 
-EXPOSE 5000
+EXPOSE 8000
 
-CMD python /www/app.py
+WORKDIR /www
+
+CMD php -S 0.0.0.0:8000
