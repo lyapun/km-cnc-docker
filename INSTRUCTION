@@ -1,0 +1,35 @@
+1. sudo docker pull lyapun/code-n-coffee-start
+
+2. Найти файл code-n-coffee и сказать его содержимое
+Hint: docker run -i lyapun/code-n-coffee-start /bin/bash
+
+3. Зарегиструйтесь на https://hub.docker.com/
+
+4. Внесите изменения в контейнер (добавьте файл, установите что-то или т.п.). В соседнем терминале определите id контейнера (docker ps) и выполните commit - `docker commit -m "<your message>" <ID> <your-username>/<your-image-name>`
+
+5. Запушайте ваш image в репозиторий: `docker push <your-username>/<your-image-name>`
+
+6. Dockerfile! fork https://github.com/lyapun/km-cnc-docker 
+
+7. Создайте под директорию и положите свой Dockerfile. Создайте простой image по примеру Dockerfile в корне.
+Hint: `docker build -t <your-username>/<your-image-name> .`
+      `docker run -d -p 5000:5000 <your-username>/<your-image-name>`
+
+8. После успешного запуска - создавайте пул-реквест со своей директорией. Можете запушать на docker hub.
+
+9. Сделать еще один image (например базу данных) и соеденить ее с первым image.
+Hint: --link
+      Автоматически создастся переменные окружения с host\port. https://docs.docker.com/userguide/dockerlinks/
+
+Например:
+`docker run -p 6379 --name some-redis -d redis`
+`docker run -d -p 5000:5000 --link some-redis:db <your-username>/<your-image-name>`
+
+DB_NAME=/web2/db
+DB_PORT=tcp://172.17.0.5:5432
+DB_PORT_6379_TCP=tcp://172.17.0.5:5432
+DB_PORT_6379_TCP_PROTO=tcp
+DB_PORT_6379_TCP_PORT=5432
+DB_PORT_6379_TCP_ADDR=172.17.0.5
+
+10. https://github.com/signalfuse/maestro-ng - Orchestration of Docker-based, multi-host environments. Редактируйте maestro.yaml - добавляйте свой image - и задеплоим на серваки.

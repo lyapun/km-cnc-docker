@@ -3,7 +3,7 @@ registries:
   docker-hub:
     registry: https://hub.docker.com/v1/
     username: lyapun
-    password: password
+    password: *****
     email: taraslyapun@gmail.com
 ships:
   docker1: {ip: 178.62.179.21}
