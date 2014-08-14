@@ -34,6 +34,6 @@ services:
       web-2:
         ship: docker2
         ports:
-	  client: 8000
+           client: 8000
         lifecycle:
-          running: [{type: tcp, port: client}]
+            running: [{type: tcp, port: client}]
