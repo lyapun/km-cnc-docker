@@ -28,3 +28,12 @@ services:
           client: 5000
         lifecycle:
             running: [{type: tcp, port: client}]
+  web-php:
+    image: zifius/php
+    instances:
+      web-2:
+        ship: docker2
+        ports:
+	  client: 8000
+        lifecycle:
+          running: [{type: tcp, port: client}]
