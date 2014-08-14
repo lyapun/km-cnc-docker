@@ -1,0 +1,30 @@
+name: demo
+registries:
+  docker-hub:
+    registry: https://hub.docker.com/v1/
+    username: lyapun
+    password: password
+    email: taraslyapun@gmail.com
+ships:
+  docker1: {ip: 178.62.179.21}
+  docker2: {ip: 178.62.179.22}
+services:
+  mongo:
+    image: dockerfile/mongodb
+    instances:
+      mongo1:
+        ship: docker1
+        ports:
+          client: 27017
+        lifecycle:
+            running: [{type: tcp, port: client}]
+  web:
+    image: lyapun/code-n-coffee2
+    requires: [ mongo ]
+    instances:
+      web-1:
+        ship: docker2
+        ports:
+          client: 5000
+        lifecycle:
+            running: [{type: tcp, port: client}]
